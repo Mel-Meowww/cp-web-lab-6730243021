@@ -40,20 +40,20 @@ func TestRouterFooBar(t *testing.T) {
 }
 
 func TestRouterGreet_ProvidedName(t *testing.T) {
-    t.Parallel()
+	t.Parallel()
 
-    appService := &service.MockService{}
-    app := fiber.New()
-    NewRouter(appService).Register(app)
+	appService := &service.MockService{}
+	app := fiber.New()
+	NewRouter(appService).Register(app)
 
-    request := httptest.NewRequest(http.MethodGet, "/greet?name=Ann", nil)
-    response, err := app.Test(request, fiber.TestConfig{Timeout: 0, FailOnTimeout: false})
-    require.NoError(t, err)
+	request := httptest.NewRequest(http.MethodGet, "/greet?name=Ann", nil)
+	response, err := app.Test(request, fiber.TestConfig{Timeout: 0, FailOnTimeout: false})
+	require.NoError(t, err)
 
-    body, err := io.ReadAll(response.Body)
-    require.NoError(t, err)
-    require.NoError(t, response.Body.Close())
+	body, err := io.ReadAll(response.Body)
+	require.NoError(t, err)
+	require.NoError(t, response.Body.Close())
 
-    require.Equal(t, http.StatusOK, response.StatusCode)
-    require.JSONEq(t, `{"message": "Hello, Ann!"}`, string(body))
+	require.Equal(t, http.StatusOK, response.StatusCode)
+	require.JSONEq(t, `{"message": "Hello, Ann!"}`, string(body))
 }

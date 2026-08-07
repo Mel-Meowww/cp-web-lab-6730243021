@@ -17,6 +17,6 @@ func NewRouter(service service.Service) Router {
 func (r Router) greet(c fiber.Ctx) error {
 	name := c.Query("name", "friend")
 	return c.JSON(fiber.Map{
-        "message": "Hello, " + name + "!",
+		"message": "Hello, " + name + "!",
 	})
 }

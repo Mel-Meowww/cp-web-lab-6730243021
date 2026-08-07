@@ -5,6 +5,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   pre-check:
     uses: ./.github/workflows/pre.yml
